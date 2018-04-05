@@ -1,21 +1,22 @@
 <template>
-  <div>
+  <div  class="full_div">
     <l-map :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
-      <Marker></Marker>
+      <Mark></Mark>
     </l-map>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LPopup } from "vue2-leaflet";
-import Marker from "./Marker";
+import { LMap, LTileLayer } from "vue2-leaflet";
+import Mark from "./Marker";
+import "../styles/map.css";
 export default {
   name: "Map",
   components: {
     LMap,
     LTileLayer,
-    LPopup
+    Mark
   },
   data() {
     return {

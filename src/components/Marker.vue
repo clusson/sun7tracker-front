@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import LMarker from "vue2-leaflet";
+import { LMarker, LPopup } from "vue2-leaflet";
 export default {
-  name: "Marker",
+  name: "Mark",
   components: {
-    LMarker
+    LMarker,
+    LPopup
   },
   data() {
     return {
