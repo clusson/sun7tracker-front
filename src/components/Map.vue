@@ -20,9 +20,8 @@ export default {
     return {
       zoom: 13,
       center: L.latLng(47.41322, -1.219482),
-      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      url:
+        "https://api.mapbox.com/styles/v1/clusson/cjf9cr2wz4c8e2qqfbyjqm5sl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2x1c3NvbiIsImEiOiJjamY5Y2o2NmwxaHl1MnhtbXl0ejdsMG10In0.t5OT9RxZcRdtmE_3a19tag",
       marker: L.latLng(47.41322, -1.219482)
     };
   }
