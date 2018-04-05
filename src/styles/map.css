@@ -641,7 +641,12 @@
   margin-left: -12px;
   border-right-color: #fff;
 }
-
+.leaflet-fake-icon-image-2x {
+  background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
+}
+.leaflet-fake-icon-shadow {
+  background-image: url(../../node_modules/leaflet/dist/images/marker-shadow.png);
+}
 .full_div {
   position: absolute;
   overflow-x: auto;
@@ -649,5 +654,4 @@
   right: 0;
   left: 0px;
   bottom: 0;
-  border-left: 1px solid #ccc;
 }
