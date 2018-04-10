@@ -1,7 +1,7 @@
 <template>
-<div id="app">
-      <Map></Map>
-</div>
+  <div id="app">
+    <Map></Map>
+  </div>
 </template>
 
 <script>
