@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
-
+import VueCordova from 'vue-cordova'
+Vue.use(VueCordova)
+console.log(Vue.cordova)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

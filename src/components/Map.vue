@@ -1,6 +1,6 @@
 <template>
   <div  class="full_div">
-    <l-map :zoom="zoom" :center="center">
+    <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
       <Mark></Mark>
     </l-map>
@@ -9,8 +9,9 @@
 
 <script>
 import { LMap, LTileLayer } from "vue2-leaflet";
-import Mark from "./Marker";
+import Mark from "./Mark";
 import "../styles/map.css";
+
 export default {
   name: "Map",
   components: {
