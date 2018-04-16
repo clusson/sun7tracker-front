@@ -1,7 +1,7 @@
 <template>
 <div>
-  <l-marker :key="1" :lat-lng="localisation.position">
-        <l-popup :content="localisation.name"></l-popup>>
+  <l-marker :key="localisation.adrDevice" :lat-lng="position">
+        <l-popup :content="localisation.pseudo"></l-popup>>
   </l-marker>
   </div>
 </template>
@@ -15,6 +15,12 @@ export default {
     LPopup
   },
   props: ["localisation"],
-  data: () => ({})
+  data: () => ({
+    position: {}
+  }),
+  created() {
+    this.position = this.localisation.position;
+    console.log(this.localisation.position.lat, this.localisation.position.lng);
+  }
 };
 </script>
