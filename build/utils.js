@@ -30,23 +30,16 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader) {
+  function generateLoaders(loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
-    if (loader === 'sass') {
+    if (loader) {
       loaders.push({
-        loader: 'sass-loader',
-        options: {
+        loader: loader + '-loader',
+        options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
-        }
+        })
       })
-
-      loaders.push({
-        loader: 'sass-resources-loader',
-        options: {
-          resources: config.build.sassGlobalResources,
-        },
-      });
     }
 
     // Extract CSS when that option is specified
@@ -64,7 +57,12 @@ exports.cssLoaders = function (options) {
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
+    postcss: generateLoaders(),
+    less: generateLoaders('less'),
+    sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
+    stylus: generateLoaders('stylus'),
+    styl: generateLoaders('stylus')
   }
 }
 
