@@ -3,9 +3,7 @@
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
       <Mark v-if="loadedOwn" :localisation="ownMarker"></Mark>
-    
         <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
-
     </l-map>
   </div>
 </template>
@@ -25,6 +23,7 @@ export default {
   },
   props: ["Vue"],
   data: () => ({
+    firstPost: true,
     otherMarker: [],
     cordova: Vue.cordova,
     loadedOwn: false,
@@ -38,55 +37,76 @@ export default {
   }),
 
   methods: {
+    geoloc() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.ownMarker = {
+            pseudo: "You",
+            position: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            },
+            adrDevice: "You"
+          };
+          this.loadedOwn = true;
+        });
+      } else {
+        if (!Vue.cordova.geolocation) {
+          window.alert("Vue.cordova.geolocation not found !");
+          return;
+        }
+        Vue.cordova.geolocation.getCurrentPosition(position => {
+          this.ownMarker = {
+            adrDevice: "You",
+            position: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            },
+            pseudo: "You"
+          };
+          this.loadedOwn = true;
+        });
+      }
+    },
     loadData() {
       fetch("https://sun7gateway.prayfornetoun.me/localisation")
         .then(response => {
           return response.json();
         })
         .then(result => {
+          console.log("get done");
           this.otherMarker = result;
-          console.log(this.otherMarker);
-          console.log(this);
         });
+      if (!this.firstPost) {
+        const data = {
+          adrDevice: this.ownMarker.adrDevice,
+          pseudo: this.ownMarker.pseudo,
+          lat: this.ownMarker.position.lat,
+          lng: this.ownMarker.position.lng
+        };
+        fetch(
+          "https://sun7gateway.prayfornetoun.me/localisation" +
+            {
+              method: "POST",
+              body: JSON.stringify(data)
+            }
+        ).then(response => {
+          console.log(response);
+        });
+      }
     }
   },
 
   created: function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.ownMarker = {
-          pseudo: "You",
-          position: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          },
-          adrDevice: "You"
-        };
-        this.loadedOwn = true;
-      });
-    } else {
-      if (!Vue.cordova.geolocation) {
-        window.alert("Vue.cordova.geolocation not found !");
-        return;
-      }
-      Vue.cordova.geolocation.getCurrentPosition(position => {
-        this.ownMarker = {
-          adrDevice: "You",
-          position: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          },
-          pseudo: "You"
-        };
-        this.loadedOwn = true;
-      });
-    }
+    this.geoloc();
     this.loadData();
     setInterval(
       function() {
-        this.loadData(this);
+        this.geoloc();
+        this.loadData();
+        this.firstPost = false;
       }.bind(this),
-      30000
+      5000
     );
   }
 };
