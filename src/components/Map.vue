@@ -29,7 +29,6 @@ export default {
     loadedOwn: false,
     loadedOther: false,
     ownMarker: {},
-
     zoom: 14.4,
     center: L.latLng(47.218371, -1.553621),
     url:
@@ -46,7 +45,8 @@ export default {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             },
-            adrDevice: "You"
+            adrDevice: "You",
+            date: Date.now()
           };
           this.loadedOwn = true;
         });
@@ -62,7 +62,8 @@ export default {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             },
-            pseudo: "You"
+            pseudo: "You",
+            date: Date.now()
           };
           this.loadedOwn = true;
         });
@@ -78,19 +79,13 @@ export default {
           this.otherMarker = result;
         });
       if (!this.firstPost) {
-        const data = {
-          adrDevice: this.ownMarker.adrDevice,
-          pseudo: this.ownMarker.pseudo,
-          lat: this.ownMarker.position.lat,
-          lng: this.ownMarker.position.lng
-        };
         fetch("https://sun7gateway.prayfornetoun.me/localisation", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(this.ownMarker)
         }).then(response => {
           console.log(response);
         });
