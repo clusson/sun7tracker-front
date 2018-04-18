@@ -84,13 +84,14 @@ export default {
           lat: this.ownMarker.position.lat,
           lng: this.ownMarker.position.lng
         };
-        fetch(
-          "https://sun7gateway.prayfornetoun.me/localisation" +
-            {
-              method: "POST",
-              body: JSON.stringify(data)
-            }
-        ).then(response => {
+        fetch("https://sun7gateway.prayfornetoun.me/localisation", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        }).then(response => {
           console.log(response);
         });
       }
