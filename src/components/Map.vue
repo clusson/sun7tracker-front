@@ -2,7 +2,7 @@
   <div class="full_div">
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
-      <Mark v-if="loadedOwn" :localisation="ownMarker"></Mark>
+      <Mark v-if="loadedOwn" :localisation="ownMarker" id="test"></Mark>
         <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
     </l-map>
   </div>
@@ -11,9 +11,11 @@
 <script>
 import axios from "axios";
 import Vue from "vue";
+import moment from "moment";
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Mark from "./Mark";
 import "../styles/map.css";
+import "../styles/test.css";
 export default {
   name: "Map",
   components: {
@@ -40,13 +42,13 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
           this.ownMarker = {
+            adrDevice: "You",
             pseudo: "You",
             position: {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             },
-            adrDevice: "You",
-            date: Date.now()
+            date: moment().format()
           };
           this.loadedOwn = true;
         });
@@ -58,13 +60,14 @@ export default {
         Vue.cordova.geolocation.getCurrentPosition(position => {
           this.ownMarker = {
             adrDevice: "You",
+            pseudo: "You",
             position: {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             },
-            pseudo: "You",
-            date: Date.now()
+            date: moment().format()
           };
+
           this.loadedOwn = true;
         });
       }
