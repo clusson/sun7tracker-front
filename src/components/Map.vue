@@ -2,8 +2,7 @@
   <div class="full_div">
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
-      <Mark v-if="loadedOwn" :localisation="ownMarker" ></Mark>
-        <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
+      <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
     </l-map>
   </div>
 </template>
@@ -15,6 +14,7 @@ import moment from "moment";
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Mark from "./Mark";
 import "../styles/map.css";
+
 export default {
   name: "Map",
   components: {
@@ -25,6 +25,11 @@ export default {
   props: ["Vue"],
   data: () => ({
     firstPost: true,
+    userIcon: L.icon({
+      iconUrl: "../assets/user-marker.png",
+      iconSize: [40, 40],
+      iconAnchor: [20, 20]
+    }),
     otherMarker: [],
     cordova: Vue.cordova,
     loadedOwn: false,
@@ -49,7 +54,6 @@ export default {
             },
             date: moment().format()
           };
-          this.loadedOwn = true;
         });
       } else {
         if (!Vue.cordova.geolocation) {
