@@ -29,15 +29,12 @@ export default {
   props: ["Vue"],
   data: () => ({
     firstPost: true,
-<<<<<<< HEAD
     userIcon: L.icon({
       iconUrl: "../assets/user-marker.png",
       iconSize: [40, 40],
       iconAnchor: [20, 20]
     }),
-=======
     pseudo: "",
->>>>>>> b516a03bd6cea062a2cfb07e3534ec401971683a
     otherMarker: [],
     cordova: Vue.cordova,
     loadedOwn: false,
