@@ -1,3 +1,22 @@
+.pseudo {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 1000;
+}
+
+.input {
+  padding: 20px;
+  font-size: 1.5em;
+  outline: none;
+  border: none; 
+  box-shadow: 5px 3px 10px 6px #ccc;
+  border-radius: 100px;
+}
+
 .leaflet-pane,
 .leaflet-tile,
 .leaflet-marker-icon,
