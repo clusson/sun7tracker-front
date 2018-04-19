@@ -59,7 +59,7 @@ export default {
           this.loadData();
           this.firstPost = false;
         }.bind(this),
-        5000
+        12000
       );
     },
     geoloc() {
