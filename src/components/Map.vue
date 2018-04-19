@@ -1,7 +1,7 @@
 <template>
   <div class="full_div">
   <div class="pseudo" v-if="!pseudoStorage">
-    <input class="input" v-model="pseudo" v-on:keyup.enter="input" placeholder="Pseudo">
+    <input class="input" v-model="pseudo" v-on:keyup.enter="input" placeholder="Votre pseudo">
   </div>
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
