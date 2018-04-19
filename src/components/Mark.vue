@@ -1,6 +1,6 @@
 <template>
 <div>
-  <l-marker :key="localisation.adrDevice" :lat-lng="position">
+  <l-marker :icon="userIcon" :key="localisation.adrDevice" :lat-lng="position">
         <l-popup :content="localisation.pseudo"></l-popup>>
   </l-marker>
   </div>
@@ -14,13 +14,18 @@ export default {
     LMarker,
     LPopup
   },
-  props: ["localisation"],
+  props: ["user", "localisation"],
   data: () => ({
-    position: {}
+    position: {},
+    userIcon: {}
   }),
   created() {
+    if (this.user) {
+      this.userIcon = L.icon({
+        iconUrl: "../assets/user-marker.png"
+      });
+    }
     this.position = this.localisation.position;
-    console.log(this.localisation.position.lat, this.localisation.position.lng);
   }
 };
 </script>

@@ -5,7 +5,7 @@
   </div>
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
-      <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
+      <Mark v-for="device in otherMarker" :key="device.adrDevice" :user="pseudo" :localisation="device"></Mark>
     </l-map>
   </div>
 </template>
@@ -29,11 +29,6 @@ export default {
   props: ["Vue"],
   data: () => ({
     firstPost: true,
-    userIcon: L.icon({
-      iconUrl: "../assets/user-marker.png",
-      iconSize: [40, 40],
-      iconAnchor: [20, 20]
-    }),
     pseudo: "",
     otherMarker: [],
     cordova: Vue.cordova,
@@ -106,7 +101,6 @@ export default {
           return response.json();
         })
         .then(result => {
-          console.log("get done");
           this.otherMarker = result;
         });
       if (!this.firstPost) {
@@ -117,9 +111,7 @@ export default {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(this.ownMarker)
-        }).then(response => {
-          console.log(response);
-        });
+        }).then(response => {});
       }
     }
   },
@@ -127,7 +119,7 @@ export default {
   created: function() {
     if (Vue.localStorage.get("Pseudo")) {
       this.pseudoStorage = true;
-      this.run();
+      (this.pseudo = Vue.localStorage.get("Pseudo")), this.run();
     }
   }
 };
