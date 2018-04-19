@@ -20,8 +20,10 @@
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-whitelist": "1",
     "moment": "^2.22.1",
+    "uuid": "^3.2.1",
     "vue": "^2.5.2",
     "vue-cordova": "^0.1.2",
+    "vue-localstorage": "^0.6.2",
     "vue2-leaflet": "^1.0.1"
   },
   "devDependencies": {
