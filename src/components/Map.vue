@@ -2,7 +2,7 @@
   <div class="full_div">
     <l-map id="map" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" ></l-tile-layer>
-      <Mark v-if="loadedOwn" :localisation="ownMarker" id="test"></Mark>
+      <Mark v-if="loadedOwn" :localisation="ownMarker" ></Mark>
         <Mark v-for="device in otherMarker" :key="device.adrDevice" :localisation="device"></Mark>
     </l-map>
   </div>
@@ -15,7 +15,6 @@ import moment from "moment";
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Mark from "./Mark";
 import "../styles/map.css";
-import "../styles/test.css";
 export default {
   name: "Map",
   components: {
